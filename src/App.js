@@ -1,25 +1,41 @@
-import logo from './logo.svg';
 import './App.css';
+import SideBarComponent from './components/SideBarComponent';
+import { Component } from 'react';
+import HeaderComponent from './components/HeaderComponent';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component{
+  constructor () {
+    super ();
+    this.state = {
+      isLoggedIn: true
+    }
+  }
+ 
+  render () {
+    return (
+      <div>
+          {this.state.isLoggedIn ? <SideBarComponent /> : <HeaderComponent />}
+      </div>
+    );
+  }
 }
 
 export default App;
+
+
+// function App() {
+//   return (
+//     <div className="App">
+//       <Router>
+//           <div className="container">
+//             <SideBarComponent />
+//                 {/* <div className="container">   
+//                     <Switch>
+//                         <Route path = "/" component = {DashboardComponent}></Route>
+//                     </Switch>   
+//                 </div> */}
+//           </div>   
+//         </Router>   
+//     </div>
+//   );
+// }
