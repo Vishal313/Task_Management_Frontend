@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -18,7 +18,6 @@ import DescriptionIcon from '@material-ui/icons/Description';
 import AssessmentIcon from '@material-ui/icons/Assessment';
 import GroupIcon from '@material-ui/icons/Group';
 import { Box } from '@material-ui/core';
-import { Paper } from '@material-ui/core';
 import HeaderComponent from './HeaderComponent';
 import BacklogComponent from './BacklogComponent';
 import DashboardComponent from './DashboardComponent';
@@ -178,11 +177,11 @@ export default function SideBarComponent () {
         })}
       >
         <HeaderComponent/>
-        {selectedIndex == 0 ? <BacklogComponent/> : null}
-        {selectedIndex == 1 ? <DashboardComponent/> : null}
-        {selectedIndex == 2 ? <ReportsComponent/> : null}
-        {selectedIndex == 3 ? <TeamsComponent/> : null}
-        {selectedIndex == 4 ? <SettingsComponent/> : null}
+        {selectedIndex === 0 ? <BacklogComponent/> : null}
+        {selectedIndex === 1 ? <DashboardComponent/> : null}
+        {selectedIndex === 2 ? <ReportsComponent/> : null}
+        {selectedIndex === 3 ? <TeamsComponent/> : null}
+        {selectedIndex === 4 ? <SettingsComponent/> : null}
       </main>
     </div>
   );

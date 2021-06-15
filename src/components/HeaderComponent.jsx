@@ -9,10 +9,13 @@ class HeaderComponent extends Component {
 
     this.state = {
       user_name : '',
-      password : ''
+      password : '', 
+      employee_id : 0,
+      response_list : []
     }
     this.setUserNameHandler = this.setUserNameHandler.bind(this);
     this.setPasswordHandler = this.setPasswordHandler.bind(this);
+    this.setEmployeeIdHandler = this.setEmployeeIdHandler.bind(this);
 
     this.checkCreds = this.checkCreds.bind(this);
   }
@@ -25,18 +28,24 @@ class HeaderComponent extends Component {
     this.setState({password: event.target.value});
   } 
 
+  setEmployeeIdHandler= (event) => {
+    this.setState({employee_id: event.target.value})
+  }
+
   checkCreds = (e) => {
     e.preventDefault();
     let cred = {user_name:this.state.user_name, password:this.state.password};
-    console.log('Credential => ' + JSON.stringify(cred));
     CredentialService.checkCreds(cred).then(res => {
-      // this.props.history.push('/');
+        this.setState({response_list: res.data});
+        this.setState({employee_id : this.state.response_list.response.employee_id});
+        console.log("Employee ID is : " + this.state.employee_id);
+        console.log("Response => " + JSON.stringify(res));
     });
   }
 
   render() {
     return (
-
+      
       <Box p = {2}>
         <Paper>
           <Box px={4} py={2}>
@@ -59,6 +68,8 @@ class HeaderComponent extends Component {
           </Box>
         </Paper>
       </Box>
+
+
     );
   }
 }
