@@ -17,14 +17,13 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import DescriptionIcon from '@material-ui/icons/Description';
 import AssessmentIcon from '@material-ui/icons/Assessment';
 import GroupIcon from '@material-ui/icons/Group';
-import { Box } from '@material-ui/core';
-import HeaderComponent from './HeaderComponent';
 import BacklogComponent from './BacklogComponent';
 import DashboardComponent from './DashboardComponent';
 import ReportsComponent from './ReportsComponent';
 import TeamsComponent from './TeamsComponent';
 import SettingsComponent from './SettingsComponent';
-
+import { Box, Tooltip } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
 
 const drawerWidth = 240;
 
@@ -92,6 +91,17 @@ export default function SideBarComponent () {
 
   return (
     <div className={classes.root}>
+      <Box>
+      <Tooltip title="Expand Sidebar">
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            className={clsx(open && classes.hide)}>
+            <MenuIcon />
+          </IconButton>
+        </Tooltip>
+      </Box>
       <CssBaseline />
       
       <Drawer
@@ -104,12 +114,16 @@ export default function SideBarComponent () {
         }}>
 
         <div className={classes.drawerHeader}>
-          <h4>Task Managemet System</h4>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-          </IconButton>
+          {/* <h4>Task Managemet System</h4> */}
+          <Typography>Task Managemet System</Typography>
+          <Tooltip title="Collapse Sidebar">
+            <IconButton onClick={handleDrawerClose}>
+              {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+            </IconButton>
+          </Tooltip>
         </div>
         <Divider />
+
         <List component="nav" aria-label="main mailbox folders">
             <ListItem
             button
@@ -158,25 +172,19 @@ export default function SideBarComponent () {
             </ListItem>
       </List>
         {/* <Divider /> */}
+      {/* <HeaderComponent/> */}
       </Drawer>
       
-          
-      <Box py = {3}>
-        <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          onClick={handleDrawerOpen}
-          className={clsx(open && classes.hide)}>
-          <MenuIcon />
-        </IconButton>
-      </Box> 
+      
 
       <main
         className={clsx(classes.content, {
           [classes.contentShift]: open,
         })}
       >
-        <HeaderComponent/>
+        
+        
+        
         {selectedIndex === 0 ? <BacklogComponent/> : null}
         {selectedIndex === 1 ? <DashboardComponent/> : null}
         {selectedIndex === 2 ? <ReportsComponent/> : null}

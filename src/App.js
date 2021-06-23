@@ -7,14 +7,18 @@ class App extends Component{
   constructor () {
     super ();
     this.state = {
-      isLoggedIn: true
+      isLoggedIn: false
     }
+  }
+
+  checkForLoggedin = (childData) => {
+    this.setState({isLoggedIn: childData})
   }
  
   render () {
     return (
       <div>
-          {this.state.isLoggedIn ? <SideBarComponent /> : <HeaderComponent />}
+          {this.state.isLoggedIn ? <SideBarComponent /> : <HeaderComponent isLoggedIn={this.checkForLoggedin} />}
       </div>
     );
   }

@@ -11,6 +11,7 @@ class HeaderComponent extends Component {
       user_name : '',
       password : '', 
       employee_id : 0,
+      loginText : 0,
       response_list : []
     }
     this.setUserNameHandler = this.setUserNameHandler.bind(this);
@@ -37,20 +38,22 @@ class HeaderComponent extends Component {
     let cred = {user_name:this.state.user_name, password:this.state.password};
     CredentialService.checkCreds(cred).then(res => {
         this.setState({response_list: res.data});
-        this.setState({employee_id : this.state.response_list.response.employee_id});
-        console.log("Employee ID is : " + this.state.employee_id);
+        this.setState({employee_id : this.state.response_list.credential.employee.id});
         console.log("Response => " + JSON.stringify(res));
+        this.props.isLoggedIn(true);
     });
+    this.setState({loginText: 1});
   }
 
   render() {
     return (
-      
+      <div className = "App">
       <Box p = {2}>
         <Paper>
-          <Box px={4} py={2}>
+          <Box p={2}>
             <div>
-              <h3>Welcome to Task Manager! Please Login to Continue</h3>
+              <h1>Welcome to Task Management System!</h1>
+              <h3>Please Login to Continue!</h3>
                <form method = "POST">
                  <div>
                     <TextField id="username" label="User Name" variant="outlined"
@@ -65,11 +68,11 @@ class HeaderComponent extends Component {
                  </div>
                </form>
             </div>
+            {this.state.loginText === 1 ? <h3>Login Failed</h3> : null}
           </Box>
         </Paper>
       </Box>
-
-
+      </div>
     );
   }
 }
