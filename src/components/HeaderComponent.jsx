@@ -39,18 +39,20 @@ class HeaderComponent extends Component {
     CredentialService.checkCreds(cred).then(res => {
         this.setState({response_list: res.data});
         this.setState({employee_id : this.state.response_list.credential.employee.id});
-        console.log("Response => " + JSON.stringify(res));
-        this.props.isLoggedIn(true);
+        window.sessionStorage.clear();
+        window.sessionStorage.setItem("employee_id", this.state.response_list.credential.employee.id); 
+        window.sessionStorage.setItem("designation", this.state.response_list.credential.employee.designation);
+        this.props.isLoggedIn(true, this.state.employee_id);
     });
     this.setState({loginText: 1});
   }
 
   render() {
     return (
-      <div className = "App">
-      <Box p = {2}>
+      <div className = "App" >
+      <Box p = {2} style = {{"width": "60%", marginLeft:"auto", marginRight: "auto"}}>
         <Paper>
-          <Box p={2}>
+          <Box p={4}>
             <div>
               <h1>Welcome to Task Management System!</h1>
               <h3>Please Login to Continue!</h3>

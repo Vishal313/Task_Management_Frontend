@@ -72,6 +72,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function SideBarComponent () {
+  
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
@@ -182,8 +183,6 @@ export default function SideBarComponent () {
           [classes.contentShift]: open,
         })}
       >
-        
-        
         
         {selectedIndex === 0 ? <BacklogComponent/> : null}
         {selectedIndex === 1 ? <DashboardComponent/> : null}
