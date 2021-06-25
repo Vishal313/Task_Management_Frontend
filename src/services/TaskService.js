@@ -13,6 +13,10 @@ class TaskService {
     createNewTaskStatus(taskStatus){
         return axios.post("http://localhost:8080/Task_Management/taskstatus", taskStatus);
     }
+
+    createNewTask(task){
+        return axios.post("http://localhost:8080/Task_Management/project/0/task/", task);
+    }
 }
 
 export default new TaskService()

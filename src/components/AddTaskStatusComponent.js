@@ -53,6 +53,7 @@ export default function AddTaskStatusComponent(props) {
 
   return (
     <div>
+      <div>
         <FormControl variant="outlined" className={classes.formControl}>
         <InputLabel id="demo-simple-select-outlined-label">Status</InputLabel>
         <Select
@@ -97,6 +98,7 @@ export default function AddTaskStatusComponent(props) {
             }}
             />
     </MuiPickersUtilsProvider>
+    </div>
     <Button color="primary" onClick={insertTaskStatus}>Add Status</Button>
     </div>
   );

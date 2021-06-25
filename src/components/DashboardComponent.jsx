@@ -14,6 +14,116 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import AddTaskStatusComponent from './AddTaskStatusComponent';
+import ProjectService from '../services/ProjectService';
+import AddAndViewTaskComponent from './AddAndViewTaskComponent';
+
+
+class Manager extends Component {
+
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            employeeList : [],
+            projectList : []
+        }
+    }
+
+    componentDidMount(){
+        ProjectService.getAllManagerRelatedDetails(window.sessionStorage.getItem("employee_id")).then((res) => {
+            this.setState({projectList: res.data.employee.projectList, employeeList: res.data.employee.employeedetails});
+        });
+    }
+    render() {
+        return (
+            <div>
+                <div className="App" style = {{"width": "60%", "display": "block", marginLeft: "auto", marginRight: "auto"}}>
+                    <Typography variant="h5">My Projects</Typography>
+                    <TableContainer component={Paper}>
+                        <Table aria-label="simple table">
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell align="center">Project Name</TableCell>
+                                    <TableCell align="center">Is Completed</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {
+                                    this.state.projectList.map(
+                                        pj => 
+                                        <TableRow key={pj.project_id}>
+                                            <TableCell align="center">{pj.project_name}</TableCell>
+                                            <TableCell align="center">{pj.is_completed ? "Yes" : "No"}</TableCell>
+                                        </TableRow>
+                                    )
+                                }
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                </div>   
+
+                <div className="App" style = {{"width": "60%", "display": "block", marginLeft: "auto", marginRight: "auto", paddingTop: "20px"}}>
+                    <Typography variant="h5">Team Leaders</Typography>
+                    <TableContainer component={Paper}>
+                        <Table aria-label="simple table">
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell align="center">Name</TableCell>
+                                    <TableCell align="center">Email Id</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {
+                                    this.state.employeeList.map(
+                                        // eslint-disable-next-line
+                                        emp => 
+                                        {if (emp.is_tl)
+                                         return <TableRow key={emp.employee_id}>
+                                            <TableCell align="center">{emp.employee_name}</TableCell>
+                                            <TableCell align="center">{emp.employee_email}</TableCell>
+                                        </TableRow>
+                                        }                                   
+                                    )
+                                }
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+
+                    <Typography variant="h5" style={{paddingTop: "25px"}}>Employees</Typography>
+                    <TableContainer component={Paper}>
+                        <Table aria-label="simple table">
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell align="center">Name</TableCell>
+                                    <TableCell align="center">Email Id</TableCell>
+                                    <TableCell align="center">Team Lead Name</TableCell>
+                                    <TableCell align="center">Action</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {
+                                    this.state.employeeList.map(
+                                        // eslint-disable-next-line
+                                        emp => 
+                                        // eslint-disable-next-line
+                                        {if (!emp.is_tl && window.sessionStorage.getItem("employee_id") != emp.employee_id)
+                                         return <TableRow key={emp.employee_id}>
+                                            <TableCell align="center">{emp.employee_name}</TableCell>
+                                            <TableCell align="center">{emp.employee_email}</TableCell>
+                                            <TableCell align="center">{emp.team_leader.name}</TableCell>
+                                            <AddAndViewTaskComponent employee_id = {emp.employee_id} employee_name = {emp.employee_name} projectList = {this.state.projectList}/>
+                                        </TableRow>
+                                        }                                   
+                                    )
+                                }
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                </div>       
+            </div>
+        )
+    }
+}
 
 class Popup extends Component {
     constructor(props) {
@@ -87,7 +197,6 @@ class DashboardComponent extends Component {
 
         this.state = {
             resultList: [],
-            taskStatusList : [],
             showPopup: false,
             currentTaskId : ''
         }
@@ -114,6 +223,9 @@ class DashboardComponent extends Component {
 
     render() {
         return (
+            <div>
+            {(window.sessionStorage.getItem("designation") === "Manager") ? <Manager /> : null}
+            {(window.sessionStorage.getItem("designation") === "Employee") ? 
             <div className = "App">
                 {this.state.showPopup ? 
                     <Paper style = {{"width": "60%", "display": "block", marginLeft: "auto", marginRight: "auto"}}>
@@ -226,6 +338,9 @@ class DashboardComponent extends Component {
                         </List>
                     </Grid>
                 </Grid>
+            </div>
+            : null
+            }
             </div>
         );
     }

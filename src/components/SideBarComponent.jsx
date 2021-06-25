@@ -25,6 +25,7 @@ import SettingsComponent from './SettingsComponent';
 import { Box, Tooltip } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -75,7 +76,7 @@ export default function SideBarComponent () {
   
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const [selectedIndex, setSelectedIndex] = React.useState(1);
  
   const handleDrawerOpen = () => {
@@ -173,7 +174,7 @@ export default function SideBarComponent () {
             </ListItem>
       </List>
         {/* <Divider /> */}
-      {/* <HeaderComponent/> */}
+        
       </Drawer>
       
       
