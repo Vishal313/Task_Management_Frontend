@@ -7,7 +7,7 @@ class App extends Component{
   constructor () {
     super ();
     this.state = {
-      isLoggedIn: false,
+      isLoggedIn: window.sessionStorage.getItem("employee_id") != null,
     }
   }
 

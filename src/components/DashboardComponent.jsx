@@ -16,6 +16,7 @@ import TableRow from '@material-ui/core/TableRow';
 import AddTaskStatusComponent from './AddTaskStatusComponent';
 import ProjectService from '../services/ProjectService';
 import AddAndViewTaskComponent from './AddAndViewTaskComponent';
+import HRComp from './HRComp';
 
 
 class Manager extends Component {
@@ -225,6 +226,7 @@ class DashboardComponent extends Component {
         return (
             <div>
             {(window.sessionStorage.getItem("designation") === "Manager") ? <Manager /> : null}
+            {(window.sessionStorage.getItem("designation") === "HR") ? <HRComp /> : null}
             {(window.sessionStorage.getItem("designation") === "Employee") ? 
             <div className = "App">
                 {this.state.showPopup ? 

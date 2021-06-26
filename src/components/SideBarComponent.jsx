@@ -24,7 +24,7 @@ import TeamsComponent from './TeamsComponent';
 import SettingsComponent from './SettingsComponent';
 import { Box, Tooltip } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
-
+import { Button } from '@material-ui/core';
 
 const drawerWidth = 240;
 
@@ -89,6 +89,11 @@ export default function SideBarComponent () {
 
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
+  };
+
+  const handleClearStorage = () => {
+    window.sessionStorage.clear();
+    window.location.reload();
   };
 
   return (
@@ -174,7 +179,7 @@ export default function SideBarComponent () {
             </ListItem>
       </List>
         {/* <Divider /> */}
-        
+        <Button onClick={handleClearStorage}>Sign Out</Button>
       </Drawer>
       
       

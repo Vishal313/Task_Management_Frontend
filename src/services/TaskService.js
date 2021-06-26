@@ -10,6 +10,10 @@ class TaskService {
         return axios.get("http://localhost:8080/Task_Management/taskstatus/" + tskId + "/");
     }
 
+    getAllEmployee(){
+        return axios.get("http://localhost:8080/Task_Management/user");
+    }
+
     createNewTaskStatus(taskStatus){
         return axios.post("http://localhost:8080/Task_Management/taskstatus", taskStatus);
     }
