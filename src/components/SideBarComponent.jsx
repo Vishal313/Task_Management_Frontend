@@ -4,7 +4,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
+// import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -14,13 +14,13 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import SettingsIcon from '@material-ui/icons/Settings';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import DescriptionIcon from '@material-ui/icons/Description';
-import AssessmentIcon from '@material-ui/icons/Assessment';
-import GroupIcon from '@material-ui/icons/Group';
-import BacklogComponent from './BacklogComponent';
+// import DescriptionIcon from '@material-ui/icons/Description';
+// import AssessmentIcon from '@material-ui/icons/Assessment';
+// import GroupIcon from '@material-ui/icons/Group';
+// import BacklogComponent from './BacklogComponent';
 import DashboardComponent from './DashboardComponent';
 import ReportsComponent from './ReportsComponent';
-import TeamsComponent from './TeamsComponent';
+// import TeamsComponent from './TeamsComponent';
 import SettingsComponent from './SettingsComponent';
 import { Box, Tooltip } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
@@ -122,23 +122,23 @@ export default function SideBarComponent () {
 
         <div className={classes.drawerHeader}>
           {/* <h4>Task Managemet System</h4> */}
-          <Typography>Task Managemet System</Typography>
+          <Typography color = "primary" style = {{"display": "block", marginLeft: "auto", marginRight: "auto"}} variant = "h5">Tasker</Typography>
           <Tooltip title="Collapse Sidebar">
             <IconButton onClick={handleDrawerClose}>
               {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
             </IconButton>
           </Tooltip>
         </div>
-        <Divider />
+        {/* <Divider /> */}
 
         <List component="nav" aria-label="main mailbox folders">
-            <ListItem
+            {/* <ListItem
             button
             selected={selectedIndex === 0}
             onClick={(event) => handleListItemClick(event, 0)}>
                 <ListItemIcon><DescriptionIcon /></ListItemIcon>
                 <ListItemText primary="Backlog" />
-            </ListItem>
+            </ListItem> */}
 
             <ListItem
             button
@@ -147,7 +147,8 @@ export default function SideBarComponent () {
                 <ListItemIcon><DashboardIcon /></ListItemIcon>
                 <ListItemText primary="Dashboard" />
             </ListItem>
-
+            {/* {
+              window.sessionStorage.getItem("designation") === "Manager" ?
             <ListItem
             button
             selected={selectedIndex === 2}
@@ -157,8 +158,9 @@ export default function SideBarComponent () {
                 </ListItemIcon>
                 <ListItemText primary="Reports" />
             </ListItem>
-
-            <ListItem
+            : null
+            } */}
+            {/* <ListItem
             button
             selected={selectedIndex === 3}
             onClick={(event) => handleListItemClick(event, 3)}>
@@ -166,7 +168,7 @@ export default function SideBarComponent () {
                     <GroupIcon />
                 </ListItemIcon>
                 <ListItemText primary="Teams" />
-            </ListItem>
+            </ListItem> */}
 
             <ListItem
             button
@@ -177,9 +179,8 @@ export default function SideBarComponent () {
                 </ListItemIcon>
                 <ListItemText primary="Settings" />
             </ListItem>
-      </List>
-        {/* <Divider /> */}
-        <Button onClick={handleClearStorage}>Sign Out</Button>
+        </List>
+      <Button style = {{position: "absolute", bottom : "0"}} onClick={handleClearStorage}>Sign Out</Button>
       </Drawer>
       
       
@@ -190,12 +191,13 @@ export default function SideBarComponent () {
         })}
       >
         
-        {selectedIndex === 0 ? <BacklogComponent/> : null}
+        {/* {selectedIndex === 0 ? <BacklogComponent/> : null} */}
         {selectedIndex === 1 ? <DashboardComponent/> : null}
         {selectedIndex === 2 ? <ReportsComponent/> : null}
-        {selectedIndex === 3 ? <TeamsComponent/> : null}
+        {/* {selectedIndex === 3 ? <TeamsComponent/> : null} */}
         {selectedIndex === 4 ? <SettingsComponent/> : null}
       </main>
     </div>
+    
   );
 }
